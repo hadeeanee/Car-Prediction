@@ -24,6 +24,41 @@ def main():
         p3=1
     elif s1=='CNG':
         p3=2
+    s2 = st.selectbox("Select the seller_type",("Dealer","Individual"))
+
+    if s2=='Dealer':
+        p4=0
+    elif s2=='Individual':
+        p4=1
+
+    s3 = st.selectbox("Select the transmission",("Manual","Automatic"))
+
+    if s3=='Manual':
+        p5=0
+    elif s3=='Automatic':
+        p5=1
+
+    p6 = st.slider("How many owners",0,3)
+
+    date_time = datetime.datetime.now()
+    
+    years = st.number_input("Car purchased year",1990,date_time.year,step=1)
+
+    p7 = date_time.year - years
+
+    data_new = pd.DataFrame({
+    'Present_Price':p1,
+    'Kms_Driven':p2,
+    'Fuel_Type':p3,
+    'Seller_Type':p4,
+    'Transmission':p5,
+    'Owner':p6,
+    'Age':p7
+},index=[0])
+
+    if st.button("Predict"):
+        pred = model.predict(data_new)
+        st.success("You can sell your car at {:.2f} lakhs".format(pred[0]))  
         
 if __name__== '__main__':
     main()
