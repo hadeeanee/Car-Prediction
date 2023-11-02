@@ -25,5 +25,5 @@ def main():
     elif s1=='CNG':
         p3=2
         
-if__name__== '__main__':
+if __name__== '__main__':
     main()
